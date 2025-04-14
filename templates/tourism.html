@@ -1,0 +1,127 @@
+{% extends "base.html" %}
+
+{% block title %}Tourism Schemes - BenefitHub{% endblock %}
+
+{% block nav_tourism_active %}active{% endblock %}
+{% block nav_home_active %}{% endblock %}
+
+{% block content %}
+<div class="container mt-5">
+    <div class="category-header">
+        <h1 class="section-title">Travel & Tourism Schemes</h1>
+        <p class="category-description">Government initiatives to promote tourism and travel across India</p>
+    </div>
+    
+    <div class="schemes-grid">
+        {% for scheme in schemes %}
+        <div class="scheme-box">
+            <div class="scheme-content">
+                <h5 class="scheme-title">{{ scheme.title }}</h5>
+                <div class="scheme-description">
+                    <p>{{ scheme.description }}</p>
+                    {% if scheme.eligibility %}
+                    <div class="scheme-details">
+                        <h6>Eligibility:</h6>
+                        <p>{{ scheme.eligibility }}</p>
+                    </div>
+                    {% endif %}
+                    {% if scheme.benefits %}
+                    <div class="scheme-details">
+                        <h6>Benefits:</h6>
+                        <p>{{ scheme.benefits }}</p>
+                    </div>
+                    {% endif %}
+                </div>
+                <div class="button-container">
+                    <button 
+                    onclick="event.preventDefault();" 
+                    class="apply-button"
+                    data-scheme='{
+                        "title": "{{ scheme.title }}",
+                        "documents": [
+                            "Aadhaar Card",
+                            "Income Certificate",
+                            "Residence Proof",
+                            "Bank Account Details",
+                            "Travel Documents",
+                            "Passport Size Photos"
+                        ],
+                        "applyLink": "{{ scheme.apply_link }}"
+                    }'>
+                    Apply
+                    </button>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+
+<!-- Application Modal -->
+<div id="application-modal" class="modal">
+    <div class="modal-content">
+        <span class="close">&times;</span>
+        <h2>Apply for <span id="scheme-title"></span></h2>
+        <div class="application-steps">
+            <h3>Required Documents:</h3>
+            <ul id="required-documents">
+                <!-- Documents will be populated dynamically -->
+            </ul>
+            <div class="button-container">
+                <button id="proceed-btn" class="apply-button">Proceed to Application</button>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/STYLING.CSS') }}">
+{% endblock %}
+
+{% block extra_js %}
+<script>
+    // Get the modal
+    var modal = document.getElementById("application-modal");
+    
+    // Get the <span> element that closes the modal
+    var span = document.getElementsByClassName("close")[0];
+    
+    // Get the proceed button
+    var proceedBtn = document.getElementById("proceed-btn");
+    
+    // When the user clicks on <span> (x), close the modal
+    span.onclick = function() {
+        modal.style.display = "none";
+    }
+    
+    // When the user clicks anywhere outside of the modal, close it
+    window.onclick = function(event) {
+        if (event.target == modal) {
+            modal.style.display = "none";
+        }
+    }
+    
+    // Add event listeners to all apply buttons
+    document.querySelectorAll('.apply-button[data-scheme]').forEach(button => {
+        button.addEventListener('click', function() {
+            const schemeData = JSON.parse(this.getAttribute('data-scheme'));
+            document.getElementById('scheme-title').textContent = schemeData.title;
+            
+            // Update documents list
+            const documentsList = document.getElementById('required-documents');
+            documentsList.innerHTML = schemeData.documents.map(doc => 
+                `<li>${doc}</li>`
+            ).join('');
+            
+            // Update proceed button link
+            proceedBtn.onclick = function() {
+                window.location.href = schemeData.applyLink;
+            }
+            
+            // Show modal
+            modal.style.display = "block";
+        });
+    });
+</script>
+{% endblock %}

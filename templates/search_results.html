@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container mt-5">
+    <h1 class="mb-4 section-title">Search Results</h1>
+    {% if results %}
+        <p class="search-summary">Found {{ results|length }} schemes matching "{{ query }}"</p>
+        <div class="schemes-grid">
+            {% for result in results %}
+            <div class="scheme-box">
+                <div class="scheme-content">
+                    <h5 class="scheme-title">{{ result.title }}</h5>
+                    <div class="scheme-description">
+                        <p>{{ result.description }}</p>
+                        {% if result.eligibility %}
+                        <div class="scheme-details">
+                            <h6>Eligibility:</h6>
+                            <p>{{ result.eligibility }}</p>
+                        </div>
+                        {% endif %}
+                    </div>
+                    <div class="button-container">
+                        <button onclick="location.href='{{ result.apply_link }}';" class="apply-button">Apply</button>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    {% else %}
+        <div class="no-results">
+            <p>No schemes found matching "{{ query }}"</p>
+            <a href="/" class="back-link">Return to Home</a>
+        </div>
+    {% endif %}
+</div>
+{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/STYLING.CSS') }}">
+{% endblock %}

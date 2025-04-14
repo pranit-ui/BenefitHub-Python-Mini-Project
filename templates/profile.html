@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="profile-container">
+    <h1>Profile</h1>
+    <div class="profile-info">
+        <div class="info-group">
+            <label>Username:</label>
+            <span>{{ current_user.username }}</span>
+        </div>
+        <div class="info-group">
+            <label>Email:</label>
+            <span>{{ current_user.email }}</span>
+        </div>
+        <div class="info-group">
+            <label>Member Since:</label>
+            <span>{{ user_info.created_at.strftime('%B %d, %Y') if user_info.created_at else 'N/A' }}</span>
+        </div>
+    </div>
+</div>
+{% endblock %}

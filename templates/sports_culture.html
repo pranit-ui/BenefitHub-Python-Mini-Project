@@ -1,0 +1,92 @@
+{% extends "base.html" %}
+
+{% block title %}Sports & Culture Schemes - BenefitHub{% endblock %}
+
+{% block content %}
+<div class="container mt-5">
+    <div class="category-header">
+        <h1 class="section-title">Sports & Culture Schemes</h1>
+        <p class="category-description">Government initiatives to promote sports excellence and cultural heritage</p>
+    </div>
+
+    <div class="schemes-grid">
+        {% for scheme in schemes %}
+        <div class="scheme-box">
+            <div class="scheme-content">
+                <h5 class="scheme-title">{{ scheme.title }}</h5>
+                <div class="scheme-description">
+                    <p>{{ scheme.description }}</p>
+                    {% if scheme.eligibility %}
+                    <div class="scheme-details">
+                        <h6>Eligibility:</h6>
+                        <p>{{ scheme.eligibility }}</p>
+                    </div>
+                    {% endif %}
+                    {% if scheme.benefits %}
+                    <div class="scheme-details">
+                        <h6>Benefits:</h6>
+                        <p>{{ scheme.benefits }}</p>
+                    </div>
+                    {% endif %}
+                </div>
+                <div class="button-container">
+                    <button 
+    onclick="event.preventDefault();" 
+    class="apply-button"
+    data-scheme='{
+        "title": "{{ scheme.title }}",
+        "documents": [
+            "Aadhaar Card",
+            "Income Certificate",
+            "Residence Proof",
+            "Bank Account Details",
+            {% if scheme.category == "education" %}
+            "Academic Records",
+            "Institution Verification"
+            {% elif scheme.category == "healthcare" %}
+            "Medical Records",
+            "Hospital Details"
+            {% endif %}
+        ],
+        "applyLink": "{{ scheme.apply_link }}"
+    }'>
+    Apply
+</button>
+                    <button onclick="location.href='{{ scheme.apply_link }}';" class="apply-button">Apply</button>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+
+<style>
+.category-header {
+    text-align: center;
+    margin-bottom: 2rem;
+}
+
+.category-description {
+    color: var(--text-color);
+    opacity: 0.8;
+    font-size: 1.1rem;
+    margin-top: 1rem;
+}
+
+.scheme-details {
+    margin-top: 1rem;
+    padding-top: 1rem;
+    border-top: 1px solid var(--card-border);
+}
+
+.scheme-details h6 {
+    color: var(--text-color);
+    font-weight: bold;
+    margin-bottom: 0.5rem;
+}
+</style>
+{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/STYLING.CSS') }}">
+{% endblock %}

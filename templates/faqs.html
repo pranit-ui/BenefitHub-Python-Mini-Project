@@ -1,0 +1,162 @@
+{% extends "base.html" %}
+
+{% block title %}FAQs - BenefitHub{% endblock %}
+
+{% block nav_services_active %}active{% endblock %}
+
+{% block content %}
+<div class="faqs-container">
+    <h1 class="section-title">Frequently Asked Questions</h1>
+    
+    <div class="faq-categories">
+        <div class="faq-category">
+            <h2>General Questions</h2>
+            <div class="faq-item">
+                <div class="faq-question">How do I find schemes I'm eligible for?</div>
+                <div class="faq-answer">
+                    You can browse schemes by category or use the search function. Each scheme listing includes eligibility criteria to help you determine if you qualify.
+                </div>
+            </div>
+            
+            <div class="faq-item">
+                <div class="faq-question">What documents are typically required for scheme applications?</div>
+                <div class="faq-answer">
+                    Common documents include:
+                    <ul>
+                        <li>Aadhaar Card</li>
+                        <li>Income Certificate</li>
+                        <li>Residence Proof</li>
+                        <li>Bank Account Details</li>
+                        <li>Category Certificate (SC/ST/OBC) if applicable</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="faq-category">
+            <h2>Application Process</h2>
+            <div class="faq-item">
+                <div class="faq-question">How can I track my application status?</div>
+                <div class="faq-answer">
+                    Once logged in, you can track your applications through the "My Applications" section in your dashboard.
+                </div>
+            </div>
+            
+            <div class="faq-item">
+                <div class="faq-question">What should I do if my application is rejected?</div>
+                <div class="faq-answer">
+                    If your application is rejected, you can:
+                    <ul>
+                        <li>Review the rejection reason provided</li>
+                        <li>Ensure all documents are correct and up-to-date</li>
+                        <li>Contact the scheme's helpdesk for clarification</li>
+                        <li>Reapply after addressing the issues</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="faq-category">
+            <h2>Scheme Categories</h2>
+            <div class="faq-item">
+                <div class="faq-question">What types of schemes are available?</div>
+                <div class="faq-answer">
+                    We offer schemes in various categories:
+                    <ul>
+                        <li>Healthcare and Medical Support</li>
+                        <li>Education and Scholarships</li>
+                        <li>Housing and Infrastructure</li>
+                        <li>Agriculture and Rural Development</li>
+                        <li>Employment and Skill Development</li>
+                        <li>Family Welfare Programs</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="faq-category">
+            <h2>Technical Support</h2>
+            <div class="faq-item">
+                <div class="faq-question">How can I get help with technical issues?</div>
+                <div class="faq-answer">
+                    For technical support:
+                    <ul>
+                        <li>Email: support@benefithub.gov.in</li>
+                        <li>Helpline: 1800-XXX-XXXX (Toll-free)</li>
+                        <li>Visit our Help Center</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+.faqs-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 2rem;
+}
+
+.faq-categories {
+    margin-top: 2rem;
+}
+
+.faq-category {
+    margin-bottom: 3rem;
+}
+
+.faq-category h2 {
+    color: var(--text-color);
+    font-size: 1.5rem;
+    margin-bottom: 1.5rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 2px solid #4CAF50;
+}
+
+.faq-item {
+    background: var(--card-bg);
+    border: 1px solid var(--card-border);
+    border-radius: 8px;
+    margin-bottom: 1rem;
+    padding: 1.5rem;
+    transition: transform 0.3s ease;
+}
+
+.faq-item:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.faq-question {
+    font-weight: bold;
+    color: var(--text-color);
+    margin-bottom: 1rem;
+    font-size: 1.1rem;
+}
+
+.faq-answer {
+    color: var(--text-color);
+    line-height: 1.6;
+}
+
+.faq-answer ul {
+    margin-top: 0.5rem;
+    margin-left: 1.5rem;
+}
+
+.faq-answer li {
+    margin-bottom: 0.5rem;
+}
+
+@media (max-width: 768px) {
+    .faqs-container {
+        padding: 1rem;
+    }
+    
+    .faq-category h2 {
+        font-size: 1.3rem;
+    }
+}
+</style>
+{% endblock %}

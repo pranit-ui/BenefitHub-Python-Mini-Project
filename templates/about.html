@@ -1,0 +1,164 @@
+{% extends "base.html" %}
+
+{% block title %}About BenefitHub{% endblock %}
+
+{% block nav_about_active %}active{% endblock %}
+
+{% block content %}
+<div class="about-container">
+    <h1 class="section-title">About BenefitHub</h1>
+    
+    <div class="about-content">
+        <section class="about-section">
+            <h2>Our Mission</h2>
+            <p>
+                BenefitHub aims to bridge the gap between citizens and government welfare schemes through an 
+                intelligent, user-friendly platform that simplifies the discovery and application process 
+                for government benefits.
+            </p>
+        </section>
+
+        <section class="about-section">
+            <h2>The Challenge</h2>
+            <p>
+                Government-to-Citizen (G2C) service delivery is crucial in ensuring that government welfare 
+                schemes reach the intended beneficiaries efficiently. However, citizens often struggle to 
+                find and apply for schemes suited to their specific needs due to fragmented information 
+                and complex eligibility criteria.
+            </p>
+        </section>
+
+        <section class="about-section">
+            <h2>Our Solution</h2>
+            <p>
+                Our platform allows users to:
+            </p>
+            <ul class="features-list">
+                <li>Access a comprehensive database of government schemes</li>
+                <li>Receive personalized scheme recommendations based on eligibility</li>
+                <li>Apply directly through the portal, reducing bureaucratic hurdles</li>
+                <li>Track application status and receive updates</li>
+            </ul>
+        </section>
+
+        <section class="about-section">
+            <h2>Key Features</h2>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">🎯</div>
+                    <h3>Intelligent Filtering</h3>
+                    <p>Advanced algorithms to match users with eligible schemes</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🔍</div>
+                    <h3>Smart Search</h3>
+                    <p>Enhanced search capabilities for quick scheme discovery</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">📱</div>
+                    <h3>User-Friendly Interface</h3>
+                    <p>Simple and intuitive design for easy navigation</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🔐</div>
+                    <h3>Secure Platform</h3>
+                    <p>Protected user data and secure application process</p>
+                </div>
+            </div>
+        </section>
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_css %}
+<style>
+.about-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 2rem;
+}
+
+.about-content {
+    margin-top: 2rem;
+}
+
+.about-section {
+    margin-bottom: 3rem;
+}
+
+.about-section h2 {
+    color: #1e4c87;
+    margin-bottom: 1rem;
+    font-size: 1.8rem;
+}
+
+.about-section p {
+    line-height: 1.6;
+    color: var(--text-color);
+    font-size: 1.1rem;
+}
+
+.features-list {
+    list-style-type: none;
+    padding-left: 0;
+}
+
+.features-list li {
+    margin: 1rem 0;
+    padding-left: 2rem;
+    position: relative;
+}
+
+.features-list li:before {
+    content: '✓';
+    color: #4CAF50;
+    position: absolute;
+    left: 0;
+}
+
+.features-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 2rem;
+    margin-top: 2rem;
+}
+
+.feature-card {
+    background: var(--card-bg);
+    border: 1px solid var(--card-border);
+    border-radius: 8px;
+    padding: 1.5rem;
+    text-align: center;
+    transition: transform 0.3s ease;
+}
+
+.feature-card:hover {
+    transform: translateY(-5px);
+}
+
+.feature-icon {
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+}
+
+.feature-card h3 {
+    color: var(--text-color);
+    margin-bottom: 0.5rem;
+}
+
+.feature-card p {
+    color: var(--text-color);
+    font-size: 0.9rem;
+}
+
+@media (max-width: 768px) {
+    .about-container {
+        padding: 1rem;
+    }
+    
+    .features-grid {
+        grid-template-columns: 1fr;
+    }
+}
+</style>
+{% endblock %}

@@ -1,0 +1,94 @@
+{% extends 'base.html' %}
+
+{% block title %}Employment Schemes{% endblock %}
+
+{% block nav_employment_active %}active{% endblock %}
+{% block nav_home_active %}{% endblock %}
+{% block nav_about_active %}{% endblock %}
+{% block nav_services_active %}{% endblock %}
+{% block nav_resources_active %}{% endblock %}
+{% block nav_contact_active %}{% endblock %}
+
+{% block content %}
+<div class="container mt-5">
+    <h1 class="mb-4 section-title">Employment & Skill Development Schemes</h1>
+    
+    <div class="schemes-grid">
+        <div class="scheme-box">
+            <div class="scheme-content">
+                <h5 class="scheme-title">PM Rozgar Yojana</h5>
+                <div class="scheme-description">
+                    <p>Employment opportunities for youth with subsidized training and placement assistance.</p>
+                </div>
+                <div class="button-container">
+                    <button onclick="location.href='#';" class="apply-button">Apply</button>
+                </div>
+            </div>
+        </div>
+        
+        <div class="scheme-box">
+            <div class="scheme-content">
+                <h5 class="scheme-title">Skill India Mission</h5>
+                <div class="scheme-description">
+                    <p>Comprehensive skill development program for enhancing employability.</p>
+                </div>
+                <div class="button-container">
+                    <button onclick="location.href='#';" class="apply-button">Apply</button>
+                </div>
+            </div>
+        </div>
+        
+        <div class="scheme-box">
+            <div class="scheme-content">
+                <h5 class="scheme-title">Startup India</h5>
+                <div class="scheme-description">
+                    <p>Support for entrepreneurs with funding, mentorship and regulatory assistance.</p>
+                </div>
+                <div class="button-container">
+                    <button onclick="location.href='#';" class="apply-button">Apply</button>
+                </div>
+            </div>
+        </div>
+        
+        <div class="scheme-box">
+            <div class="scheme-content">
+                <h5 class="scheme-title">National Apprenticeship Promotion Scheme</h5>
+                <div class="scheme-description">
+                    <p>Promotes apprenticeship training and provides stipend support to apprentices.</p>
+                </div>
+                <div class="button-container">
+                    <button onclick="location.href='#';" class="apply-button">Apply</button>
+                </div>
+            </div>
+        </div>
+        
+        <div class="scheme-box">
+            <div class="scheme-content">
+                <h5 class="scheme-title">Pradhan Mantri Kaushal Vikas Yojana (PMKVY)</h5>
+                <div class="scheme-description">
+                    <p>Enables youth to take up industry-relevant skill training that will help them in securing better livelihood.</p>
+                </div>
+                <div class="button-container">
+                    <button onclick="location.href='#';" class="apply-button">Apply</button>
+                </div>
+            </div>
+        </div>
+        
+        <div class="scheme-box">
+            <div class="scheme-content">
+                <h5 class="scheme-title">Deen Dayal Upadhyaya Grameen Kaushalya Yojana (DDU-GKY)</h5>
+                <div class="scheme-description">
+                    <p>Focuses on rural youth between the ages of 15 and 35 years from poor families.</p>
+                </div>
+                <div class="button-container">
+                    <button onclick="location.href='#';" class="apply-button">Apply</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/STYLING.CSS') }}">
+{% endblock %}

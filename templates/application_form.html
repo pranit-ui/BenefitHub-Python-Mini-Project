@@ -1,0 +1,143 @@
+{% extends "base.html" %}
+
+{% block title %}Apply for {{ scheme.title }}{% endblock %}
+
+{% block content %}
+<div class="container mt-5">
+    <div class="application-header">
+        <h1 class="section-title">Apply for {{ scheme.title }}</h1>
+        <p class="scheme-description">{{ scheme.description }}</p>
+    </div>
+
+    <div class="eligibility-section">
+        <h3>Eligibility Criteria</h3>
+        <p>{{ scheme.eligibility }}</p>
+        
+        <h3>Benefits</h3>
+        <p>{{ scheme.benefits }}</p>
+    </div>
+
+    <div class="application-form">
+        <h2>Application Form</h2>
+        <form id="schemeApplicationForm" method="post" action="{{ url_for('submit_application') }}" enctype="multipart/form-data">
+            <input type="hidden" name="scheme_title" value="{{ scheme.title }}">
+            <input type="hidden" name="scheme_category" value="{{ scheme.category }}">
+            
+            <div class="form-section">
+                <h3>Personal Information</h3>
+                <div class="form-group">
+                    <label for="fullName">Full Name</label>
+                    <input type="text" id="fullName" name="fullName" class="form-control" required value="{{ current_user.username }}">
+                </div>
+                
+                <div class="form-group">
+                    <label for="email">Email Address</label>
+                    <input type="email" id="email" name="email" class="form-control" required value="{{ current_user.email }}">
+                </div>
+                
+                <div class="form-group">
+                    <label for="phone">Phone Number</label>
+                    <input type="tel" id="phone" name="phone" class="form-control" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="address">Address</label>
+                    <textarea id="address" name="address" class="form-control" rows="3" required></textarea>
+                </div>
+            </div>
+            
+            <div class="form-section">
+                <h3>Required Documents</h3>
+                <div class="form-group">
+                    <label for="idProof">ID Proof (Aadhaar Card)</label>
+                    <input type="file" id="idProof" name="idProof" class="form-control-file" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="incomeProof">Income Certificate</label>
+                    <input type="file" id="incomeProof" name="incomeProof" class="form-control-file" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="residenceProof">Residence Proof</label>
+                    <input type="file" id="residenceProof" name="residenceProof" class="form-control-file" required>
+                </div>
+                
+                {% if scheme.category == "education" %}
+                <div class="form-group">
+                    <label for="academicRecords">Academic Records</label>
+                    <input type="file" id="academicRecords" name="academicRecords" class="form-control-file" required>
+                </div>
+                {% elif scheme.category == "healthcare" %}
+                <div class="form-group">
+                    <label for="medicalRecords">Medical Records</label>
+                    <input type="file" id="medicalRecords" name="medicalRecords" class="form-control-file" required>
+                </div>
+                {% endif %}
+            </div>
+            
+            <div class="form-section">
+                <h3>Bank Details</h3>
+                <div class="form-group">
+                    <label for="accountHolder">Account Holder Name</label>
+                    <input type="text" id="accountHolder" name="accountHolder" class="form-control" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="accountNumber">Account Number</label>
+                    <input type="text" id="accountNumber" name="accountNumber" class="form-control" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="ifscCode">IFSC Code</label>
+                    <input type="text" id="ifscCode" name="ifscCode" class="form-control" required>
+                </div>
+            </div>
+            
+            <div class="form-group">
+                <div class="form-check">
+                    <input class="form-check-input" type="checkbox" id="declaration" name="declaration" required>
+                    <label class="form-check-label" for="declaration">
+                        I hereby declare that all the information provided is true to the best of my knowledge.
+                    </label>
+                </div>
+            </div>
+            
+            <button type="submit" class="btn btn-primary submit-btn">Submit Application</button>
+        </form>
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_css %}
+<style>
+    .application-header {
+        text-align: center;
+        margin-bottom: 2rem;
+    }
+    
+    .eligibility-section {
+        background-color: var(--card-bg);
+        padding: 1.5rem;
+        border-radius: 8px;
+        margin-bottom: 2rem;
+    }
+    
+    .form-section {
+        background-color: var(--card-bg);
+        padding: 1.5rem;
+        border-radius: 8px;
+        margin-bottom: 1.5rem;
+    }
+    
+    .form-group {
+        margin-bottom: 1rem;
+    }
+    
+    .submit-btn {
+        margin-top: 1.5rem;
+        width: 100%;
+        padding: 0.75rem;
+    }
+</style>
+{% endblock %}

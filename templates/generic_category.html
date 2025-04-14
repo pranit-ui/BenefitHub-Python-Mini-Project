@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+
+{% block title %}{{ title }} Schemes{% endblock %}
+
+{% block content %}
+<div class="container mt-5">
+    <h1 class="mb-4 section-title">{{ title }} Schemes</h1>
+    <div class="schemes-grid">
+        {% for scheme in schemes %}
+        <div class="scheme-box">
+            <div class="scheme-content">
+                <h5 class="scheme-title">{{ scheme.title }}</h5>
+                <div class="scheme-description">
+                    <p>{{ scheme.description }}</p>
+                    {% if scheme.eligibility %}
+                    <div class="scheme-details">
+                        <h6>Eligibility:</h6>
+                        <p>{{ scheme.eligibility }}</p>
+                    </div>
+                    {% endif %}
+                    {% if scheme.benefits %}
+                    <div class="scheme-details">
+                        <h6>Benefits:</h6>
+                        <p>{{ scheme.benefits }}</p>
+                    </div>
+                    {% endif %}
+                </div>
+                <div class="button-container">
+                    <button onclick="location.href='{{ scheme.apply_link }}';" class="apply-button">Apply</button>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}

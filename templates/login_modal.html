@@ -1,0 +1,82 @@
+<!-- Login Modal -->
+<div id="loginModal" class="modal">
+    <div class="modal-content">
+        <span class="close">&times;</span>
+        <div class="modal-header">
+            <h2>Login to BenefitHub</h2>
+            <p>Access your account to apply for schemes</p>
+        </div>
+        
+        <!-- Alert messages -->
+        <div id="alertSuccess" class="alert alert-success"></div>
+        <div id="alertError" class="alert alert-danger"></div>
+        
+        <form id="loginForm" method="POST">
+            <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+            <div class="form-group">
+                <label for="username">Username</label>
+                <input type="text" class="form-control" id="username" name="username" required>
+            </div>
+            
+            <div class="form-group">
+                <label for="password">Password</label>
+                <input type="password" class="form-control" id="password" name="password" required>
+            </div>
+            
+            <div class="form-check">
+                <input type="checkbox" class="form-check-input" id="remember" name="remember">
+                <label class="form-check-label" for="remember">Remember me</label>
+            </div>
+            
+            <div class="forgot-password">
+                <a href="#">Forgot password?</a>
+            </div>
+            
+            <button type="submit" class="submit-btn">Login</button>
+            
+            <div class="social-login">
+                <p>Or login with:</p>
+                <button type="button" onclick="window.location.href='{{ url_for('google_login') }}'" class="google-login-btn">
+                    <div class="google-btn-content">
+                        <img src="{{ url_for('static', filename='images/google-icon.png') }}" alt="Google">
+                        <span>Login with Google</span>
+                    </div>
+                </button>
+            </div>
+
+            <div class="register-link">
+                Don't have an account? <a href="#" id="showRegisterForm">Register</a>
+            </div>
+        </form>
+
+        <!-- Registration Form -->
+        <form id="registerForm" method="POST" style="display: none;">
+            <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+            <div class="form-group">
+                <label for="reg_username">Username</label>
+                <input type="text" class="form-control" id="reg_username" name="username" required>
+            </div>
+            
+            <div class="form-group">
+                <label for="reg_email">Email</label>
+                <input type="email" class="form-control" id="reg_email" name="email" required>
+            </div>
+            
+            <div class="form-group">
+                <label for="reg_password">Password</label>
+                <input type="password" class="form-control" id="reg_password" name="password" required>
+            </div>
+            
+            <div class="form-group">
+                <label for="reg_confirm_password">Confirm Password</label>
+                <input type="password" class="form-control" id="reg_confirm_password" name="confirm_password" required>
+            </div>
+            
+            <button type="submit" class="submit-btn">Register</button>
+            
+            <div class="login-link">
+                Already have an account? <a href="#" id="showLoginForm">Login</a>
+            </div>
+        </form>
+    </div>
+</div>

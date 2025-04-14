@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
+    <title>{% block title %}BenefitHub - Government of India{% endblock %}</title>
+    <a href="{{ url_for('home') }}" class="brand-link">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/login.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/chatbot.css') }}">
+    {% block extra_css %}{% endblock %}
+</head>
+<!-- Remove the script from the head section and keep only this one at the end of body -->
+<body>
+    <script src="{{ url_for('static', filename='js/chatbot.js') }}"></script>
+    <!-- Top Bar -->
+  <!-- Add this inside the top-bar div, before top-bar-links -->
+<div class="theme-switch">
+    <button class="theme-switch-button" onclick="toggleTheme()">
+        <span id="theme-icon">🌙</span>
+    </button>
+</div>
+    <!-- Header -->
+    <header class="header">
+        <div class="logo-container">
+            <div class="logo"></div>
+            <div class="logo-text">
+                <a href="{{ url_for('home') }}" class="logo-link">
+                    <h1>BenefitHub</h1>
+                    <p>Government of India</p>
+                </a>
+            </div>
+        </div>
+            <nav class="main-nav">
+                <ul>
+                    <li class="{% block nav_home_active %}{% endblock %}"><a href="{{ url_for('home') }}">Home</a></li>
+                    <li class="{% block nav_about_active %}{% endblock %}">
+                        <a href="{{ url_for('about') }}">About</a>
+                    </li>
+                    
+                    <li class="{% block nav_services_active %}{% endblock %}">
+                        <a href="{{ url_for('faqs') }}">FAQ's</a></li>
+                    <li class="{% block nav_resources_active %}{% endblock %}"><a href="#">Resources</a></li>
+                    <li class="{% block nav_contact_active %}{% endblock %}"><a href="#">Contact Us</a></li>
+                    
+                    {% if current_user and current_user.is_authenticated %}
+                    <li class="user-menu">
+                        <a href="#">{{ current_user.username }}</a>
+                        <div class="user-menu-dropdown">
+                            <a href="{{ url_for('dashboard') }}">Dashboard</a>
+                            <a href="{{ url_for('profile') }}">Profile</a>
+                            <a href="{{ url_for('logout') }}">Logout</a>
+                        </div>
+                    </li>
+                    {% else %}
+                    <li><button id="loginBtn" class="login-btn">Login</button></li>
+                    {% endif %}
+                    <li class="search-icon">🔍</li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main>
+        <div class="container">
+            {% block content %}{% endblock %}
+        </div>
+    </main>
+
+    {% include 'login_modal.html' %}
+
+    <script src="{{ url_for('static', filename='js/login.js') }}"></script>
+    {% block scripts %}{% endblock %}
+    <!-- Add this before the closing </body> tag -->
+<script src="{{ url_for('static', filename='js/theme.js') }}"></script>
+
+<!-- Add before closing body tag if not already present -->
+<script src="{{ url_for('static', filename='js/application.js') }}"></script>
+
+<!-- Add this before the closing body tag -->
+<div id="applicationModal" class="modal">
+    <div class="modal-content">
+        <span class="close-modal">&times;</span>
+        <h2>Application Guide</h2>
+        <div class="application-steps">
+            <div class="step">
+                <div class="step-number">1</div>
+                <div class="step-content">
+                    <h3>Check Eligibility</h3>
+                    <p>Review the eligibility criteria carefully to ensure you qualify for the scheme.</p>
+                </div>
+            </div>
+            <div class="step">
+                <div class="step-number">2</div>
+                <div class="step-content">
+                    <h3>Prepare Documents</h3>
+                    <ul id="required-documents">
+                        <!-- Documents will be populated dynamically -->
+                    </ul>
+                </div>
+            </div>
+            <div class="step">
+                <div class="step-number">3</div>
+                <div class="step-content">
+                    <h3>Fill Application Form</h3>
+                    <p>Complete all required fields in the application form accurately.</p>
+                </div>
+            </div>
+            <div class="step">
+                <div class="step-number">4</div>
+                <div class="step-content">
+                    <h3>Submit & Track</h3>
+                    <p>Submit your application and track its status through your dashboard.</p>
+                </div>
+            </div>
+        </div>
+        <div class="modal-footer">
+            <button id="proceedToApplication" class="proceed-btn">Proceed to Application</button>
+        </div>
+    </div>
+</div>
+    <!-- Add this before closing body tag -->
+<!-- Replace the existing chatbot container with this -->
+<div class="chatbot-container">
+    <button class="chatbot-toggle" id="chatbotToggle">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="white">
+            <path d="M20 2H4c-1.1 0-2 .9-2 2v18l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm0 14H5.17L4 17.17V4h16v12z"/>
+            <path d="M7 9h10v2H7zm0-3h10v2H7zm0 6h7v2H7z"/>
+        </svg>
+    </button>
+    <div class="chatbot-window" id="chatbotWindow">
+        <div class="chatbot-header">
+            <h3>BenefitHub Assistant</h3>
+            <button class="chatbot-close" id="chatbotClose">&times;</button>
+        </div>
+        <div class="chatbot-messages" id="chatbotMessages"></div>
+        <div class="chatbot-input">
+            <input type="text" id="chatbotInput" placeholder="Type your message...">
+            <button id="chatbotSend">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="white">
+                    <path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"/>
+                </svg>
+            </button>
+        </div>
+    </div>
+</div>
+
+<!-- Add this before closing body tag -->
+<script src="{{ url_for('static', filename='js/chatbot.js') }}"></script>
+</body>
+<!-- Move all scripts to the end of body -->
+<script src="{{ url_for('static', filename='js/login.js') }}"></script>
+<script src="{{ url_for('static', filename='js/theme.js') }}"></script>
+<script src="{{ url_for('static', filename='js/application.js') }}"></script>
+<!-- Remove this line -->
+<script src="{{ url_for('static', filename='js/chatbot.js') }}"></script>
+</body>

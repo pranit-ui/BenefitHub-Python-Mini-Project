@@ -1,0 +1,166 @@
+/* Grid Layout Styles */
+.schemes-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    gap: 2rem;
+    padding: 2rem;
+    max-width: 1400px;
+    margin: 0 auto;
+}
+
+/* Scheme Box Styles */
+.scheme-box {
+    background: #fff;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+    position: relative;
+    min-height: 280px;
+    padding: 1.5rem;
+    border: 1px solid #e1e1e1;
+}
+
+.scheme-box:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+}
+
+/* Content Layout */
+.scheme-content {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
+/* Title Styles */
+.scheme-title {
+    color: #1a365d;
+    font-size: 1.5rem;
+    font-weight: 600;
+    margin-bottom: 1rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 2px solid #4299e1;
+}
+
+/* Description Styles */
+.scheme-description {
+    flex: 1;
+    color: #4a5568;
+    font-size: 1rem;
+    line-height: 1.6;
+    margin-bottom: 2rem;
+}
+
+/* Button Container */
+.button-container {
+    position: absolute;
+    bottom: 1.5rem;
+    right: 1.5rem;
+    text-align: right;
+}
+
+/* Apply Button Styles */
+.apply-button {
+    background-color: #4CAF50;
+    color: white;
+    padding: 0.75rem 1.5rem;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: 500;
+    transition: all 0.3s ease;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    font-size: 0.9rem;
+}
+
+.apply-button:hover {
+    background-color: #45a049;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(76, 175, 80, 0.2);
+}
+
+/* Section Title Styles */
+.section-title {
+    text-align: center;
+    color: #2d3748;
+    margin: 2rem 0;
+    font-size: 2.5rem;
+    font-weight: 700;
+    position: relative;
+    padding-bottom: 1rem;
+}
+
+.section-title::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100px;
+    height: 3px;
+    background: linear-gradient(to right, #4CAF50, #45a049);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .schemes-grid {
+        grid-template-columns: 1fr;
+        padding: 1rem;
+    }
+    
+    .scheme-box {
+        min-height: 250px;
+    }
+    
+    .section-title {
+        font-size: 2rem;
+    }
+}
+/* Update scheme box styles to use CSS variables */
+.scheme-box {
+    background: var(--card-bg);
+    border: 1px solid var(--card-border);
+    color: var(--text-color);
+}
+
+.scheme-title {
+    color: var(--text-color);
+}
+
+.scheme-description {
+    color: var(--text-color);
+}
+/* Update the top-bar styles */
+.top-bar {
+    background-color: #ff6b1e;
+    color: white;
+    padding: 5px 0;
+    height: 30px;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+}
+
+/* Update theme switch positioning */
+.theme-switch {
+    margin-right: 20px;
+    display: flex;
+    align-items: center;
+}
+
+.theme-switch-button {
+    background: none;
+    border: none;
+    color: white;
+    cursor: pointer;
+    font-size: 16px;
+    padding: 5px;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.theme-switch-button:hover {
+    opacity: 0.8;
+}

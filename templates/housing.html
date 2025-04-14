@@ -1,0 +1,48 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container mt-5">
+    <h1 class="mb-4 section-title">Housing Schemes</h1>
+    <div class="schemes-grid">
+        {% for scheme in schemes %}
+        <div class="scheme-box">
+            <div class="scheme-content">
+                <h5 class="scheme-title">{{ scheme.title }}</h5>
+                <div class="scheme-description">
+                    <p>{{ scheme.description }}</p>
+                </div>
+                <div class="button-container">
+                    <button 
+    onclick="event.preventDefault();" 
+    class="apply-button"
+    data-scheme='{
+        "title": "{{ scheme.title }}",
+        "documents": [
+            "Aadhaar Card",
+            "Income Certificate",
+            "Residence Proof",
+            "Bank Account Details",
+            {% if scheme.category == "education" %}
+            "Academic Records",
+            "Institution Verification"
+            {% elif scheme.category == "healthcare" %}
+            "Medical Records",
+            "Hospital Details"
+            {% endif %}
+        ],
+        "applyLink": "{{ scheme.apply_link }}"
+    }'>
+    Apply
+</button>
+                    <button onclick="location.href='{{ scheme.apply_link }}';" class="apply-button">Apply</button>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/STYLING.CSS') }}">
+{% endblock %}

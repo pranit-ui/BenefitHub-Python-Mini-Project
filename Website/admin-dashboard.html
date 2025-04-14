@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard - Document Verification</title>
+    <style>
+        .verification-container {
+            max-width: 1000px;
+            margin: 2rem auto;
+            padding: 2rem;
+        }
+
+        .application-card {
+            background: white;
+            padding: 1.5rem;
+            margin: 1rem 0;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+
+        .doc-preview {
+            max-width: 200px;
+            margin: 1rem 0;
+        }
+
+        .action-buttons {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .approve-btn {
+            background: green;
+            color: white;
+            border: none;
+            padding: 0.5rem 1rem;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        .reject-btn {
+            background: red;
+            color: white;
+            border: none;
+            padding: 0.5rem 1rem;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        .doc-link {
+            display: inline-block;
+            padding: 8px 16px;
+            background-color: #1a237e;
+            color: white;
+            text-decoration: none;
+            border-radius: 4px;
+            margin: 1rem 0;
+        }
+
+        .document-item {
+            margin-bottom: 1.5rem;
+        }
+    </style>
+</head>
+<body>
+    <div class="verification-container">
+        <h2>Document Verification Dashboard</h2>
+        
+        <div class="application-card">
+            <h3>Application #12345</h3>
+            <p>Applicant: John Doe</p>
+            <p>Category: Construction Worker</p>
+            
+            <div class="documents">
+                <h4>Aadhaar Card</h4>
+                <img src="#" alt="Aadhaar Preview" class="doc-preview">
+                
+                <h4>Income Certificate</h4>
+                <img src="#" alt="Income Cert Preview" class="doc-preview">
+                
+                <h4>Work Proof</h4>
+                <img src="#" alt="Work Proof Preview" class="doc-preview">
+            </div>
+
+            <div class="action-buttons">
+                <button class="approve-btn" onclick="approveApplication('12345')">Approve</button>
+                <button class="reject-btn" onclick="showRejectDialog('12345')">Reject</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Rejection Dialog -->
+    <dialog id="rejectDialog">
+        <h3>Rejection Reason</h3>
+        <form method="dialog">
+            <textarea id="rejectionReason" rows="4" cols="50" required></textarea>
+            <div class="action-buttons">
+                <button type="submit" class="reject-btn">Submit</button>
+                <button type="button" onclick="this.closest('dialog').close()">Cancel</button>
+            </div>
+        </form>
+    </dialog>
+
+    <script>
+        async function loadApplications() {
+            try {
+                const response = await fetch('/get_applications');
+                if (!response.ok) {
+                    throw new Error('Failed to fetch applications');
+                }
+                const applications = await response.json();
+                console.log('Loaded applications:', applications); // Debug log
+                
+                const container = document.querySelector('.verification-container');
+                container.innerHTML = '<h2>Document Verification Dashboard</h2>';
+                
+                if (applications.length === 0) {
+                    container.innerHTML += '<p>No applications to review.</p>';
+                    return;
+                }
+                
+                applications.forEach(app => {
+                    const card = createApplicationCard(app);
+                    container.appendChild(card);
+                });
+            } catch (error) {
+                console.error('Error loading applications:', error);
+                document.querySelector('.verification-container').innerHTML += 
+                    '<p style="color: red;">Error loading applications. Please try again later.</p>';
+            }
+        }
+
+        function createApplicationCard(app) {
+            console.log('Creating card for application:', app); // Debug log
+            const card = document.createElement('div');
+            card.className = 'application-card';
+            
+            const documentsList = Object.entries(app.documents || {})
+                .map(([type, path]) => {
+                    const fileExtension = path.split('.').pop().toLowerCase();
+                    const isImage = ['jpg', 'jpeg', 'png', 'gif'].includes(fileExtension);
+                    
+                    return `
+                        <div class="document-item">
+                            <h4>${type.charAt(0).toUpperCase() + type.slice(1)}</h4>
+                            ${isImage ? 
+                                `<img src="${path}" 
+                                     alt="${type} Preview" 
+                                     class="doc-preview"
+                                     onerror="this.src='#'; this.alt='Unable to load document';">` :
+                                `<a href="${path}" target="_blank" class="doc-link">View Document</a>`
+                            }
+                        </div>
+                    `;
+                }).join('');
+        
+            card.innerHTML = `
+                <h3>Application #${app.id}</h3>
+                <p>Applicant: ${app.name}</p>
+                <p>Category: ${app.category}</p>
+                <p>Email: ${app.email}</p>
+                <div class="documents">
+                    ${documentsList || '<p>No documents uploaded</p>'}
+                </div>
+                <div class="action-buttons">
+                    <button class="approve-btn" onclick="updateApplicationStatus('${app.id}', 'approved')">
+                        Approve
+                    </button>
+                    <button class="reject-btn" onclick="showRejectDialog('${app.id}')">
+                        Reject
+                    </button>
+                </div>
+            `;
+            return card;
+        }
+
+        async function updateApplicationStatus(id, status, reason = '') {
+            try {
+                const response = await fetch('/update_application_status', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ id, status, reason })
+                });
+                
+                if (response.ok) {
+                    alert(`Application ${status}! Email sent to applicant.`);
+                    location.reload();
+                }
+            } catch (error) {
+                console.error('Error:', error);
+            }
+        }
+
+        function showRejectDialog(id) {
+            const dialog = document.getElementById('rejectDialog');
+            dialog.showModal();
+            
+            dialog.querySelector('form').onsubmit = (e) => {
+                e.preventDefault();
+                const reason = document.getElementById('rejectionReason').value;
+                updateApplicationStatus(id, 'rejected', reason);
+                dialog.close();
+            };
+        }
+
+        // Remove duplicate approveApplication function and event listener
+        
+        // Load applications when page loads
+        document.addEventListener('DOMContentLoaded', loadApplications);
+    </script>
+</body>
+</html>

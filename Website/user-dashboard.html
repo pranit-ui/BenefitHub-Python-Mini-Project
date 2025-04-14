@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Dashboard - Document Upload</title>
+    <style>
+        /* ... Basic styles from main website ... */
+        .upload-container {
+            max-width: 800px;
+            margin: 2rem auto;
+            padding: 2rem;
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        .document-item {
+            margin: 1rem 0;
+            padding: 1rem;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+
+        .checkbox-container {
+            display: none;
+            margin-top: 1rem;
+            color: green;
+        }
+
+        .upload-btn {
+            background: #1a237e;
+            color: white;
+            padding: 0.5rem 1rem;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        .status-pending {
+            color: orange;
+        }
+
+        .status-approved {
+            color: green;
+        }
+
+        .status-rejected {
+            color: red;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <!-- Similar header as main website -->
+    </header>
+
+    <div class="upload-container">
+        <h2>Document Upload</h2>
+        <form id="documentUploadForm" action="/submit_documents" method="POST" enctype="multipart/form-data">
+            <!-- Add user details section -->
+            <div class="form-section">
+                <h3>Personal Details</h3>
+                <input type="text" name="name" placeholder="Full Name" required>
+                <input type="email" name="email" placeholder="Email Address" required>
+                <select name="category" required>
+                    <option value="">Select Category</option>
+                    <option value="construction">Construction Worker</option>
+                    <option value="daily">Daily Wage Laborer</option>
+                    <option value="vendor">Street Vendor</option>
+                </select>
+            </div>
+            
+            <div class="document-item">
+                <h3>Aadhaar Card</h3>
+                <input type="file" id="aadhaar" name="aadhaar" accept=".pdf,.jpg,.jpeg,.png" required>
+                <div class="checkbox-container">
+                    <input type="checkbox" checked disabled>
+                    <label>Uploaded Successfully</label>
+                </div>
+                <p class="status"></p>
+            </div>
+
+            <div class="document-item">
+                <h3>Income Certificate</h3>
+                <input type="file" id="income" name="income" accept=".pdf,.jpg,.jpeg,.png" required>
+                <div class="checkbox-container">
+                    <input type="checkbox" checked disabled>
+                    <label>Uploaded Successfully</label>
+                </div>
+                <p class="status"></p>
+            </div>
+
+            <div class="document-item">
+                <h3>Work Proof</h3>
+                <input type="file" id="work" name="work" accept=".pdf,.jpg,.jpeg,.png" required>
+                <div class="checkbox-container">
+                    <input type="checkbox" checked disabled>
+                    <label>Uploaded Successfully</label>
+                </div>
+                <p class="status"></p>
+            </div>
+
+            <button type="submit" class="upload-btn">Submit Documents</button>
+        </form>
+    </div>
+
+    <script>
+        document.querySelectorAll('input[type="file"]').forEach(input => {
+            input.addEventListener('change', function() {
+                if (this.files.length > 0) {
+                    const checkboxContainer = this.nextElementSibling;
+                    checkboxContainer.style.display = 'block';
+                }
+            });
+        });
+
+        document.getElementById('documentUploadForm').onsubmit = async function(e) {
+            e.preventDefault();
+            
+            const formData = new FormData(this);
+            
+            try {
+                const response = await fetch('/submit_documents', {
+                    method: 'POST',
+                    body: formData
+                });
+                
+                const result = await response.json();
+                
+                if (result.success) {
+                    alert('Documents submitted successfully!');
+                    window.location.href = '/';  // Redirect to homepage
+                } else {
+                    alert('Error submitting documents: ' + result.error);
+                }
+            } catch (error) {
+                console.error('Error:', error);
+                alert('Error submitting documents. Please try again.');
+            }
+        };
+    </script>
+</body>
+</html>

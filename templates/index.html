@@ -1,0 +1,95 @@
+{% extends "base.html" %}
+
+{% block title %}BenifitHub - Government of India{% endblock %}
+
+{% block nav_home_active %}active{% endblock %}
+
+{% block content %}
+    <!-- Hero Banner -->
+    <section class="hero-banner">
+        <h2 class="hero-title">Find Government Schemes</h2>
+        <p class="hero-subtitle">Search and apply for welfare schemes and services<br>tailored to your eligibility criteria</p>
+        <div class="search-container">
+            <form action="{{ url_for('search') }}" method="get">
+                <input type="text" name="q" class="search-input" placeholder="Search for schemes..." required>
+                <button type="submit" class="search-button">Search</button>
+            </form>
+        </div>
+    </section>
+
+    <!-- Scheme Categories -->
+    <section class="categories-section">
+        <h2 class="section-title">Scheme Categories</h2>
+        <div class="categories-container">
+            {% for category in categories %}
+            <a href="{{ category.link|default('#') }}" class="category-card">
+                <div class="category-icon">{{ category.icon }}</div>
+                <h3 class="category-title">{{ category.title }}</h3>
+                <p class="category-count">{{ category.count }} Schemes</p>
+            </a>
+            {% endfor %}
+        </div>
+    </section>
+
+    <!-- Featured Schemes -->
+ 
+    <!-- Featured Scheme Headline -->
+    <section class="featured-headline-section">
+        <div class="container">
+            <h2 class="section-title">BenefitHub Featured Scheme</h2>
+            <div class="featured-headline-container">
+                <div class="featured-headline-card">
+                    <div class="headline-badge">Featured</div>
+                    <h3 class="headline-title">Pragati Shramik Yojana</h3>
+                    <p class="headline-description">-A comprehensive social security scheme for daily wage laborers.</p>
+                    <div class="headline-details">
+                        <div class="headline-detail">
+                          
+                            <span class="detail-text">-₹5 lakh coverage for medical emergencies and accidents</span>
+                        </div>
+                        <div class="headline-detail">
+                           
+                            <span class="detail-text">-Guaranteed ₹5,000/month for unemployed laborers</span>
+                        </div>
+                        <div class="headline-detail">
+                           
+                            <span class="detail-text"> -Free training programs for alternative employment opportunities</span>
+                        </div>
+                    </div>
+                    <div class="headline-cta">
+                        <a href="http://127.0.0.1:4000/" class="headline-button">Apply Now</a>
+                     
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+   
+         <!-- Tourism Featured Scheme -->
+             <section class="featured-headline-section">
+                 <div class="container">
+                     <h2 class="section-title">BenefitHub Tourism Scheme</h2>
+                     <div class="featured-headline-container">
+                         <div class="featured-headline-card">
+                             <div class="headline-badge">Featured</div>
+                             <h3 class="headline-title">BenefitHub Special Tourism Scheme</h3>
+                             <p class="headline-description">Exclusive scheme offering special travel packages and discounts for domestic tourism.</p>
+                             <div class="headline-details">
+                                 <div class="headline-detail">
+                                     <span class="detail-text">-Up to 50% discount on accommodation at partner hotels</span>
+                                 </div>
+                                 <div class="headline-detail">
+                                     <span class="detail-text">-Transportation subsidies for tourist destinations</span>
+                                 </div>
+                                 <div class="headline-detail">
+                                     <span class="detail-text">-Free guided tours at select heritage sites</span>
+                                 </div>
+                             </div>
+                             <div class="headline-cta">
+                                 <a href="http://127.0.0.1:2000/" class="headline-button">Apply Now</a>
+                             </div>
+                         </div>
+                     </div>
+                 </div>
+             </section>
+    {% endblock %}

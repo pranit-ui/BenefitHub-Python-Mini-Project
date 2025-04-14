@@ -1,0 +1,152 @@
+[
+  {
+    "fullName": "keegan pinto",
+    "dob": "2001-02-03",
+    "gender": "male",
+    "aadhaar": "123412341234",
+    "mobile": "1234567890",
+    "email": "keeganpinto22@student.sfit.ac.in",
+    "state": "Maharashtra ",
+    "city": "Mumbai",
+    "district": "Malad west",
+    "pincode": "400082",
+    "previousTravel": "yes",
+    "preferredStates[]": "Goa",
+    "travelPurpose": "tourism",
+    "categories[]": "student",
+    "transport": "train",
+    "upiId": "fnwdjnw@oksbi",
+    "govBenefits": "yes",
+    "terms": "on",
+    "aadhaarConsent": "on",
+    "preferredStates": [
+      "Goa"
+    ],
+    "categories": [
+      "student"
+    ],
+    "aadhaarDoc": "1743434522.640667_MPL_Experiment 8 - Factorial of a number.pdf",
+    "timestamp": "2025-03-31T20:52:02.648035",
+    "id": 1743434522648
+  },
+  {
+    "fullName": "chinmay sonar",
+    "dob": "2005-03-12",
+    "gender": "male",
+    "aadhaar": "456289654428",
+    "mobile": "9699177539",
+    "email": "chinmaysonar2005@gmail.com",
+    "state": "Maharashtra",
+    "city": "Jalgaon ",
+    "district": "Jalgaon",
+    "pincode": "425001",
+    "previousTravel": "yes",
+    "preferredStates[]": "Rajasthan",
+    "travelPurpose": "tourism",
+    "categories[]": "student",
+    "transport": "train",
+    "upiId": "chinmaysonar@oksbi",
+    "govBenefits": "yes",
+    "terms": "on",
+    "aadhaarConsent": "on",
+    "preferredStates": [
+      "Rajasthan"
+    ],
+    "categories": [
+      "student"
+    ],
+    "aadhaarDoc": "1743524069.06546_letter.pdf",
+    "timestamp": "2025-04-01T21:44:29.069624",
+    "id": 1743524069069
+  },
+  {
+    "fullName": "chinmay sonar",
+    "dob": "2005-05-02",
+    "gender": "male",
+    "aadhaar": "456289654428",
+    "mobile": "7058658759",
+    "email": "chinmaysonar2005@gmail.com",
+    "state": "Maharashtra",
+    "city": "Jalgaon ",
+    "district": "Jalgaon",
+    "pincode": "425001",
+    "previousTravel": "yes",
+    "preferredStates[]": "Goa",
+    "travelPurpose": "tourism",
+    "categories[]": "student",
+    "transport": "flight",
+    "upiId": "chinmaysonar@oksbi",
+    "govBenefits": "yes",
+    "terms": "on",
+    "aadhaarConsent": "on",
+    "preferredStates": [
+      "Goa"
+    ],
+    "categories": [
+      "student"
+    ],
+    "aadhaarDoc": "1743567498.554796_EXP 1 Basics of Python.pdf",
+    "timestamp": "2025-04-02T09:48:18.561609",
+    "id": 1743567498561
+  },
+  {
+    "fullName": "chinmay sonar",
+    "dob": "2005-04-23",
+    "gender": "male",
+    "aadhaar": "456289654428",
+    "mobile": "7058658759",
+    "email": "chinmaysonar2005@gmail.com",
+    "state": "Maharashtra",
+    "city": "Jalgaon ",
+    "district": "Jalgaon",
+    "pincode": "425001",
+    "previousTravel": "yes",
+    "preferredStates[]": "Goa",
+    "travelPurpose": "education",
+    "categories[]": "student",
+    "transport": "flight",
+    "upiId": "chinmaysonar@oksbi",
+    "govBenefits": "yes",
+    "terms": "on",
+    "aadhaarConsent": "on",
+    "preferredStates": [
+      "Goa"
+    ],
+    "categories": [
+      "student"
+    ],
+    "aadhaarDoc": "1743567662.199557_letter.pdf",
+    "timestamp": "2025-04-02T09:51:02.201918",
+    "id": 1743567662201
+  },
+  {
+    "fullName": "chinmay sonar",
+    "dob": "2005-03-12",
+    "gender": "male",
+    "aadhaar": "456289654428",
+    "mobile": "7058658759",
+    "email": "chinmaysonar2005@gmail.com",
+    "state": "Maharashtra",
+    "city": "Jalgaon ",
+    "district": "Jalgaon",
+    "pincode": "425001",
+    "previousTravel": "yes",
+    "preferredStates[]": "Odisha",
+    "travelPurpose": "education",
+    "categories[]": "student",
+    "transport": "train",
+    "upiId": "chinmaysonar@oksbi",
+    "govBenefits": "yes",
+    "terms": "on",
+    "aadhaarConsent": "on",
+    "preferredStates": [
+      "Odisha"
+    ],
+    "categories": [
+      "student"
+    ],
+    "aadhaarDoc": "1743568468.208698_letter.pdf",
+    "timestamp": "2025-04-02T10:04:28.211054",
+    "id": 1743568468211
+  }
+]
